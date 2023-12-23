@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 
 fileSchema.statics.uploadFile = multer({
 	storage: storage,
-}).single("fileLocation");
+}).single("filename");
 
 fileSchema.statics.filePath = FILE_PATH;
 

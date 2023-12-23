@@ -20,22 +20,28 @@
             <span class="material-icons-outlined cancel-alert-button"> cancel </span>
         </span>
 
-        <div class="file-block">
-            <div class="file-info">
-                <span class="material-icons-outlined file-icon"> description </span>
-                <span class="file-name"> </span>
-                |
-                <span class="file-size"> </span>
-            </div>
-            <a href="">
-                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-            </a>
-            <a href="/csvDelete/<%=  %>">
-                <span class="material-icons remove-file-icon">delete</span>
-            </a>
-            <div class="progress-bar"> </div>
-        </div>
         <button type="button" class="upload-button"> Upload </button>
+
+        <div>
+            <% files.forEach(file=> { %>
+                <div class="file-block">
+                    <div class="file-info">
+                        <span class="material-icons-outlined file-icon"> description </span>
+                        <span class="file-name"> <%= file.filename %></span>
+                        |
+                        <span class="file-size"> </span>
+                    </div>
+                    <a href="">
+                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                    </a>
+                    <a href="/csvDelete/<%=  %>">
+                        <span class="material-icons remove-file-icon">delete</span>
+                    </a>
+                    <div class="progress-bar"> </div>
+                </div>
+            <% }); %>
+        </div>
+
     </div>
 </form>
 

@@ -1,23 +1,14 @@
-const Files = require('../models/files');
+const CSV = require('../models/files');
 
 module.exports.home = async function (req, res) {
 
     try {
 
-        // const files = await Files.find({});
-        // await new Promise((resolve, reject) => {
-        //     Files.uploadFile(req, res, (err) => {
-        //         if (err) {
-        //             console.log("Multer error", err);
-        //             reject(err);
-        //         } else {
-        //             resolve();
-        //         }
-        //     });
-        // });
+        const CSVs = await CSV.find({});
 
         return res.render('home', {
             title: 'CSV Viewer',
+            files: CSVs
         })
     } catch (error) {
         console.log('Error : ', error);
