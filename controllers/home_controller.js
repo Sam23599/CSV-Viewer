@@ -18,19 +18,8 @@ module.exports.home = async function (req, res) {
     }
 }
 
-module.exports.csvView = async function (req, res) {
 
-    try {
 
-        return res.render('viewer', {
-            title: 'CSV File',
-        })
-    } catch (error) {
-        console.log('Error : ', error);
-        return;
-    }
-
-}
 
 module.exports.csvUpload = async function (req, res) {
     try {
@@ -54,6 +43,7 @@ module.exports.csvUpload = async function (req, res) {
 
 
 
+
 module.exports.csvDelete = async function (req, res) {
     let csvId = req.params.id;
     try {
@@ -71,4 +61,26 @@ module.exports.csvDelete = async function (req, res) {
     }
 }
 
+
+
+
+module.exports.csvView = async function (req, res) {
+
+    console.log(req.params);
+    try {
+        const csvFile = await CSV.findById({_id: req.params.id});
+
+        const page = 1;
+        const limit = 20;
+        const startIndex = (page-1)*limit;
+        const endIndex = page*limit;
+
+        return res.render('viewer', {
+            title: 'CSV File',
+        })
+    } catch (error) {
+        console.log('Error : ', error);
+        return;
+    }
+}
 // DO CSV VIEW next
