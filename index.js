@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./config/mongoose');
 const app = express();
 const port = process.env.PORT || 6100;
+const path = require('path');
 
 
 // setup view engine
@@ -25,6 +26,7 @@ app.set('layout extractScripts', true);
 
 // make upload path available for the browser
 app.use('/uploads', express.static(__dirname + '/uploads'));
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // set up routes
 app.use('/', require('./routes/index'));

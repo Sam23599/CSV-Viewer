@@ -19,13 +19,14 @@ const storage = multer.diskStorage({
 		cb(null, path.join(__dirname, "..", FILE_PATH));
 	},
 	filename: function (req, file, cb) {
-		cb(null, file.fieldname + "-" + Date.now());
+        cb(null, Date.now() + "-" + file.originalname);
 	},
 });
 
 fileSchema.statics.uploadFile = multer({
-	storage: storage,
+    storage: storage,
 }).single("filename");
+
 
 fileSchema.statics.filePath = FILE_PATH;
 

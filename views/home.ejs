@@ -1,10 +1,13 @@
 <link rel="stylesheet" href="/css/home.css">
 
-<form class="form-container" enctype='multipart/form-data'>
+<form action="/csvUpload" method="post" class="form-container" enctype='multipart/form-data'>
     <div class="upload-files-container">
+        
         <div class="drag-file-area">
+            
             <span class="material-icons-outlined upload-icon"> file_upload </span>
             <h3 class="dynamic-message"> Drag & drop any file here </h3>
+
             <label class="label"> or
                 <span class="browse-files">
                     <input type="file" name="filename" accept=".csv" class="default-file-input" />
@@ -20,24 +23,21 @@
             <span class="material-icons-outlined cancel-alert-button"> cancel </span>
         </span>
 
-        <button type="button" class="upload-button"> Upload </button>
+        <button type="submit" class="upload-button"> Upload </button>
 
-        <div>
+        <div class="files-list">
             <% files.forEach(file=> { %>
                 <div class="file-block">
                     <div class="file-info">
                         <span class="material-icons-outlined file-icon"> description </span>
                         <span class="file-name"> <%= file.filename %></span>
-                        |
-                        <span class="file-size"> </span>
                     </div>
-                    <a href="">
+                    <a href="/csvView/<%= file._id %>">
                         <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                     </a>
-                    <a href="/csvDelete/<%=  %>">
+                    <a href="/csvDelete/<%= file._id %>" class="delete-file-btn">
                         <span class="material-icons remove-file-icon">delete</span>
                     </a>
-                    <div class="progress-bar"> </div>
                 </div>
             <% }); %>
         </div>

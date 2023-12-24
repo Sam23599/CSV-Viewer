@@ -99,14 +99,19 @@ body {
     transition: all 1s;
     width: 390px;
     position: relative;
-    display: none;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: 10px 0 15px;
     padding: 10px 20px;
     border-radius: 25px;
+}
+
+.file-block a{
+    color: white;
     cursor: pointer;
+
 }
 
 .file-block i:hover{

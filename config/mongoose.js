@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // mongoose.connect("mongodb://127.0.0.1:27017/eCell");
-const atlasConnectionString = "mongodb+srv://satyamvirat:jIgWDruT8WhmPT88@cluster0.7alzrxi.mongodb.net/?retryWrites=true&w=majority";
+const atlasConnectionString = "mongodb+srv://satyamvirat:4IUKA5MtN31PsMY6@cluster0.ln9gz3n.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose.connect(atlasConnectionString);
 
@@ -14,3 +14,4 @@ db.once('open', () => {
 });
 
 module.exports = db;
+
