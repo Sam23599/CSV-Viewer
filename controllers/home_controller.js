@@ -1,5 +1,6 @@
 const path = require('path');
 const CSV = require('../models/files');
+const csvParser = require('csv-parser');
 const fs = require('fs');
 
 module.exports.home = async function (req, res) {
@@ -33,7 +34,7 @@ module.exports.csvUpload = async function (req, res) {
         return res.status(200).json({
             filename: newFile.filename,
             fileLocation: newFile.fileLocation,
-            _id: newFile._id 
+            _id: newFile._id
         });
     } catch (error) {
         console.error(error);
@@ -66,21 +67,40 @@ module.exports.csvDelete = async function (req, res) {
 
 module.exports.csvView = async function (req, res) {
 
-    console.log(req.params);
     try {
-        const csvFile = await CSV.findById({_id: req.params.id});
+        const csvFile = await CSV.findById({ _id: req.params.id });
 
-        const page = 1;
-        const limit = 20;
-        const startIndex = (page-1)*limit;
-        const endIndex = page*limit;
+        const csvData = [];
+        const csvHeaders = [];
 
-        return res.render('viewer', {
-            title: 'CSV File',
-        })
+        fs.createReadStream(__dirname + '/..' + csvFile.fileLocation)
+            .pipe(
+                csvParser({
+                    delimiter: ','
+                })
+            )
+            .on('headers', (heads) => {
+                heads.map((head) => {
+                    csvHeaders.push(head);
+                });
+            })
+            .on('data', (data) => {
+                csvData.push(data);
+            })
+            .on('end', () => {
+                console.log(`Your csv file has been processed.`);
+                return res.render('viewer', {
+                    title: 'CSV File',
+                    id: req.params.id,
+                    filename: `${csvFile.filename.substring(csvFile.filename.lastIndexOf('-'), csvFile.filename.lastIndexOf('.'))}`,
+                    csv: csvFile,
+                    csvHeaders: csvHeaders,
+                    csvData: csvData,
+                    currentIndex: 10
+                });
+            })
     } catch (error) {
         console.log('Error : ', error);
         return;
     }
 }
-// DO CSV VIEW next

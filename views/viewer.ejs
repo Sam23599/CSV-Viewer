@@ -1,49 +1,73 @@
 <link rel="stylesheet" href="/css/viewer.css">
+<link rel="stylesheet" href="/css/search.css">
 
-<section>
-    <!--for demo wrap-->
-    <h1>Fixed Table header</h1>
-    <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Company</th>
-                    <th>Price</th>
-                    <th>Change</th>
-                    <th>Change %</th>
-                </tr>
-            </thead>
-        </table>
+<div>
+    <a id="Back" class="meta-link source-link" href="/">
+        <i class="fas fa-link"></i>
+        <span class="roboto-mono">Back</span>
+    </a>
+    
+    <form action="" class="search-bar" id="searchForm">
+        <input type="search" id="searchInput" name="search" autocomplete="off" required>
+        <button class="search-btn" type="button">
+        </button>
+    </form>
+    
+    <section>
+        <h1>Fixed Table header</h1>
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <% for (head of csvHeaders) { %>
+                            <% if (head !== 'Avatar') { %>
+                                <th>
+                                    <%= head %>
+                                </th>
+                            <% } %>
+                        <% } %>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content" id="tableContainer">
+            <table cellpadding="0" cellspacing="0" id="dataTable">
+                <tbody>
+                    <% for (let i = currentIndex - 10; i < Math.min(currentIndex, csvData.length); i++) { %>
+                        <tr>
+                            <% for (let cellKey in csvData[i]) { %>
+                                <% if (cellKey !== 'Avatar') { %>
+                                    <td>
+                                        <%= csvData[i][cellKey] %>
+                                    </td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    
+        <a id="PrevBTN" class="meta-link source-link" href="#" onclick="showPrevRows()">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span class="roboto-mono">Prev 10</span>
+        </a>
+        <a id="NextBTN" class="meta-link source-link" href="#" onclick="showNextRows()">
+            <span class="roboto-mono">Next 10</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </section>
+    
+    <div class="made-with-love">
+        Made with
+        <i>♥</i> by
+        <a target="_blank" href="https://linktr.ee/sam_virat">Satyam Virat</a>
     </div>
-    <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-                <tr>
-                    <td>AAC</td>
-                    <td>AUSTRALIAN COMPANY </td>
-                    <td>$1.38</td>
-                    <td>+2.01</td>
-                    <td>-0.36%</td>
-                </tr>
-                <tr>
-                    <td>AAD</td>
-                    <td>AUSENCO</td>
-                    <td>$2.38</td>
-                    <td>-0.01</td>
-                    <td>-1.36%</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-
-<!-- follow me template -->
-<div class="made-with-love">
-    Made with
-    <i>♥</i> by
-    <a target="_blank" href="https://linktr.ee/sam_virat">Satyam Virat</a>
 </div>
 
+<script>
+    // send csvData to js file for processing
+    // can also be done by passing the csvData as data-attribute on the prev/next buttons and then fetched by id and attribute in js file
+    var csvData = <%- JSON.stringify(csvData) %>;
+</script>
 <script src="/js/viewer.js"></script>
