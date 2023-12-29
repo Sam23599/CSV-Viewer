@@ -1,7 +1,16 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
-const FILE_PATH = path.join('/uploads');
+const fs = require('fs');
+
+const FILE_PATH = '/uploads'; 
+
+// Check if the directory exists, if not, create it
+const uploadFolderPath = path.join(__dirname, '..', FILE_PATH);
+if (!fs.existsSync(uploadFolderPath)) {
+    fs.mkdirSync(uploadFolderPath);
+}
+
 
 const fileSchema = new mongoose.Schema(
     {
