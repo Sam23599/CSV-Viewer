@@ -21,9 +21,8 @@ input {
 .search-bar {
     display: flex;
     position: absolute;
-    right: 3rem;
+    right: 2.5rem;
     justify-content: flex-end;
-    top: 45px;
 }
 
 

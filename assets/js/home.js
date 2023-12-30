@@ -89,7 +89,7 @@ uploadButton.addEventListener('click', async (e) => {
                     </a>
                 `;
 
-                filesList.appendChild(newFileBlock);
+                filesList.prepend(newFileBlock);
 
                 let animation = 0;
                 const id = setInterval(frame, 10);

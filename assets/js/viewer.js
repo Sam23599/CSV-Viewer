@@ -53,12 +53,10 @@ function showNextRows() {
         }
         tableBody.appendChild(row);
     }
-
     currentIndex += 10; // Update the index for the next set of rows
 }
 
 function showPrevRows() {
-    console.log(currentIndex)
     if (currentIndex > 10) {
         currentIndex -= 20; // Update the index for the previous set of rows
         showNextRows(); // Display the previous set of 10 rows

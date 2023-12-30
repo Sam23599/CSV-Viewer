@@ -15,37 +15,39 @@
     
     <section>
         <h1>Fixed Table header</h1>
-        <div class="tbl-header">
-            <table cellpadding="0" cellspacing="0">
-                <thead>
-                    <tr>
-                        <% for (head of csvHeaders) { %>
-                            <% if (head !== 'Avatar') { %>
-                                <th>
-                                    <%= head %>
-                                </th>
-                            <% } %>
-                        <% } %>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="tbl-content" id="tableContainer">
-            <table cellpadding="0" cellspacing="0" id="dataTable">
-                <tbody>
-                    <% for (let i = currentIndex - 10; i < Math.min(currentIndex, csvData.length); i++) { %>
+        <div class="tbl-container">
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0">
+                    <thead>
                         <tr>
-                            <% for (let cellKey in csvData[i]) { %>
-                                <% if (cellKey !== 'Avatar') { %>
-                                    <td>
-                                        <%= csvData[i][cellKey] %>
-                                    </td>
+                            <% for (head of csvHeaders) { %>
+                                <% if (head !== 'Avatar') { %>
+                                    <th>
+                                        <%= head %>
+                                    </th>
                                 <% } %>
                             <% } %>
                         </tr>
-                    <% } %>
-                </tbody>
-            </table>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content" id="tableContainer">
+                <table cellpadding="0" cellspacing="0" id="dataTable">
+                    <tbody>
+                        <% for (let i = currentIndex - 10; i < Math.min(currentIndex, csvData.length); i++) { %>
+                            <tr>
+                                <% for (let cellKey in csvData[i]) { %>
+                                    <% if (cellKey !== 'Avatar') { %>
+                                        <td>
+                                            <%= csvData[i][cellKey] %>
+                                        </td>
+                                    <% } %>
+                                <% } %>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     
         <a id="PrevBTN" class="meta-link source-link" href="#" onclick="showPrevRows()">
